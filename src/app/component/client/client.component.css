@@ -1,3 +1,17 @@
+.sidenav-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidenav {
+  width: 250px;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
 .segmento {
   margin-top: 20px;
   padding: 10px;
@@ -6,23 +20,7 @@
   background-color: #f9f9f9;
 }
 
-.example-label {
-  display: table-cell;
-  font-size: 14px;
-  margin-left: 8px;
-  min-width: 120px;
-}
-
 .example-button-row {
-  display: table-cell;
-  max-width: 600px;
-}
-
-.example-button-row .mat-mdc-button-base {
-  margin: 8px 8px 8px 0;
-}
-
-.example-flex-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -34,17 +32,74 @@
   width: 140px;
 }
 
-.espace {
-  margin-top: 50px;
-  padding: 50px;
-}
-
 .logo-icon {
   width: 120px;
   height: 50px;
   object-fit: contain;
 }
 
+/* ---------------- Responsive Design ---------------- */
 
+@media screen and (max-width: 768px) {
+  .sidenav {
+    display: none;
+  }
 
+  .mat-sidenav-content {
+    padding: 10px;
+  }
 
+  .example-button-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .example-button-container {
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .segmento {
+    padding: 20px;
+    margin-top: 10px;
+  }
+
+  .logo-icon {
+    width: 100px;
+    height: 40px;
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+  }
+
+  table mat-column-def {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .example-button-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .example-button-container {
+    width: 100%;
+  }
+
+  .mat-sidenav-container {
+    flex-direction: column;
+  }
+
+  .mat-sidenav {
+    display: none;
+  }
+}

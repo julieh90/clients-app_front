@@ -1,13 +1,12 @@
-
-  <div>
-    <h2>
-      <img src="/logo.png" class="logo-icon" alt="Logo"/>
-    </h2>
-  </div>
+<div>
+  <h2>
+    <img src="/logo.png" class="logo-icon" alt="Logo"/>
+  </h2>
+</div>
 
 <mat-sidenav-container class="sidenav-container">
   <!-- Menú lateral -->
-  <mat-sidenav mode="side" opened>
+  <mat-sidenav mode="side" opened class="sidenav">
     <mat-nav-list>
       <mat-list-item (click)="setSection('cliente')"> Client </mat-list-item>
       <mat-list-item (click)="setSection('look_history')">Client look history </mat-list-item>
@@ -19,8 +18,9 @@
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
+
   <mat-sidenav-content>
-    <div>
+    <div class="content">
       <section>
         <div class="example-button-row">
           <button mat-raised-button color="primary" (click)="toggleSegment()">
@@ -30,15 +30,14 @@
         </div>
       </section>
 
-
-     <div *ngIf="isVisible" class="segmento">
+      <div *ngIf="isVisible" class="segmento">
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="form-container">
-          <mat-form-field appearance="fill" *ngIf="formVisible" lass="flex-item">>
+          <mat-form-field appearance="fill" *ngIf="formVisible">
             <mat-label>SharedKey</mat-label>
             <input matInput formControlName="sharedKey" type="number" required />
           </mat-form-field>
 
-          <mat-form-field appearance="fill" >
+          <mat-form-field appearance="fill">
             <mat-label>BusinessId</mat-label>
             <input matInput formControlName="businessId" required />
           </mat-form-field>
@@ -60,7 +59,7 @@
 
           <mat-form-field appearance="fill">
             <mat-label>EndDate</mat-label>
-            <input matInput formControlName="endDate"  />
+            <input matInput formControlName="endDate" />
           </mat-form-field>
 
           <button mat-raised-button color="primary" type="submit">Save</button>
@@ -68,13 +67,12 @@
       </div>
     </div>
 
-
     <mat-form-field>
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input />
     </mat-form-field>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="sharedKey">
         <th mat-header-cell *matHeaderCellDef>SharedKey</th>
         <td mat-cell *matCellDef="let element">{{ element.sharedKey }}</td>
@@ -116,7 +114,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
-
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">
           No data matching the filter "{{ input.value }}"
@@ -125,5 +122,3 @@
     </table>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-
