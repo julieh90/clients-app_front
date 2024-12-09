@@ -1,16 +1,21 @@
-<div>
-  <h2>Alianza</h2>
-</div>
+
+  <div>
+    <h2>
+      <img src="/logo.png" class="logo-icon" alt="Logo"/>
+    </h2>
+  </div>
+
 <mat-sidenav-container class="sidenav-container">
   <!-- Menú lateral -->
   <mat-sidenav mode="side" opened>
     <mat-nav-list>
-      <mat-list-item (click)="setSection('Cliente')"> Client </mat-list-item>
-      <mat-list-item (click)="setSection('exportar')">
-        Client look
+      <mat-list-item (click)="setSection('cliente')"> Client </mat-list-item>
+      <mat-list-item (click)="setSection('look_history')">Client look history </mat-list-item>
+      <mat-list-item (click)="setSection('pin_configuration')">
+        Emergency PIN Configuration
       </mat-list-item>
-      <mat-list-item (click)="setSection('listaClientes')">
-        Lista de Clientes
+      <mat-list-item (click)="setSection('pin_history')">
+        Emergency PIN History
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
@@ -19,12 +24,12 @@
       <section>
         <div class="example-button-row">
           <button mat-raised-button color="primary" (click)="toggleSegment()">
-            {{ isVisible ? "Nuevo Cliente" : "Nuevo Cliente" }}
+            {{ isVisible ? "Nuevo Cliente" : "New Client" }}
           </button>
-          <button mat-raised-button color="primary">Export</button>
+          <button mat-raised-button color="primary" (click)="triggerDownload()">Export</button>
         </div>
       </section>
-      
+
 
      <div *ngIf="isVisible" class="segmento">
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="form-container">
@@ -97,10 +102,13 @@
       </ng-container>
 
       <ng-container matColumnDef="Edit">
-        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element">
           <button mat-button color="primary" (click)="editarCliente(element)">
             Edit
+          </button>
+          <button mat-button color="primary" (click)="eliminarCliente(element)">
+            Delete
           </button>
         </td>
       </ng-container>

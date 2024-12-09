@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Client} from '../models/Client';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { saveAs } from 'file-saver';
+
 
 
 @Injectable({
@@ -31,6 +33,29 @@ export class ClientService {
 
     return this.http.put<Client>(urlPut, updatedClient);
   }
+  downloadCsv(): Observable<Blob> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/csv',
+    });
+
+    console.log('Entro a download'+`${this.baseUrl}/csv`);
+    return this.http.get<Blob>(`${this.baseUrl}/csv`, { headers, responseType: 'blob' as 'json' });
+  }
+
+  triggerDownload(): void {
+    this.downloadCsv().subscribe((response: Blob) => {
+      saveAs(response, 'clients.csv');
+    });
+  }
+
+  deleteClient(client: Client): Observable<Client> {
+    console.log('metodo delete ' + client.businessId + ' ' + client.sharedKey);
+    let urlDelete = `${this.baseUrl}/${client.sharedKey}`;
+    console.log(urlDelete);
+
+    return this.http.delete<Client>(urlDelete);
+  }
+
 
 
 }

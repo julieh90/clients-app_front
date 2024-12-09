@@ -52,6 +52,7 @@ export class ClientComponent {
 
 
   constructor(private clientService: ClientService, private fb: FormBuilder) {
+
     this.myForm = this.fb.group({
       sharedKey: [''],
       businessId: ['', Validators.required],
@@ -124,10 +125,23 @@ export class ClientComponent {
     this.isVisible = true;
   }
 
+  eliminarCliente(client: Client): void {
+    console.log('eliminar ' + client.businessId);
+
+    this.clientService.deleteClient(client).subscribe({
+      next: (updatedClient) => {
+        console.log('Cliente eliminado correctamente:', updatedClient);
+        this.cargarClientes();
+      },
+      error: (error) => {
+        console.error('Error al eliminar el cliente:', error);
+      }
+    });
+  }
+
   actualizarCliente(client: Client): void {
     console.log('actualizar ' + client.businessId);
 
-    // Suscripción al observable del PUT
     this.clientService.updateCliente(client).subscribe({
       next: (updatedClient) => {
         console.log('Cliente actualizado correctamente:', updatedClient);
@@ -148,13 +162,28 @@ export class ClientComponent {
     this.selectedClient = {sharedKey: '', businessId: '', email: '', phone: 0, startDate: '', endDate: ''}
   }
 
+  triggerDownload(): void {
+    this.clientService.triggerDownload();
+  }
+
   setSection(section: string) {
     this.currentSection = section;
+     if (section === 'cliente') {
+      console.log('setSection');
+      this.cargarClientes();
+    }
+
+
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+
+
+
+
 
 }
