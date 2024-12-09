@@ -52,15 +52,38 @@
             <input matInput formControlName="phone" type="phone" required />
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field>
             <mat-label>StartDate</mat-label>
-            <input matInput formControlName="startDate" required />
+            <input
+              matInput
+              formControlName="startDate"
+              required
+              [matDatepicker]="picker"
+            />
+            <mat-hint>YYYY/DD/MM</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
-            <mat-label>EndDate</mat-label>
-            <input matInput formControlName="endDate" />
+          <mat-form-field>
+            <mat-label>endDate</mat-label>
+            <input
+              matInput
+              formControlName="endDate"
+              [matDatepicker]="endpicker"
+            />
+            <mat-hint>YYYY/DD/MM</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="endpicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #endpicker></mat-datepicker>
           </mat-form-field>
+
+
 
           <button mat-raised-button color="primary" type="submit">Save</button>
         </form>

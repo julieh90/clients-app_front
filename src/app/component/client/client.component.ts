@@ -14,6 +14,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 
@@ -33,6 +34,7 @@ import {MatNativeDateModule} from '@angular/material/core';
     HttpClientModule,
     MatTableModule,
     MatNativeDateModule,
+    MatDatepickerModule,
 
   ],
   templateUrl: './client.component.html',
